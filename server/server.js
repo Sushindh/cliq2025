@@ -71,7 +71,7 @@ io.on('connection', (socket) => {
 });
 
 // Fix Text with Gemini
-app.post('https://cliq2025.onrender.com/api/fix-text', async (req, res) => {
+app.post('/api/fix-text', async (req, res) => {
   const { text } = req.body;
   if (!text) return res.status(400).json({ error: 'Text required' });
 
@@ -125,7 +125,7 @@ app.post('https://cliq2025.onrender.com/api/fix-text', async (req, res) => {
 });
 
 // Predict next words
-app.post('https://cliq2025.onrender.com/api/predict-words', async (req, res) => {
+app.post('/api/predict-words', async (req, res) => {
   const { text } = req.body;
   if (!text || text.trim() === "" || text.endsWith(" ")) {
     return res.json({ predictions: [] });
@@ -192,7 +192,8 @@ app.post('https://cliq2025.onrender.com/api/predict-words', async (req, res) => 
   }
 });
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
+
 server.listen(PORT, () => {
   console.log(`✅ Server running on http://localhost:${PORT}`);
   console.log(`✨ AI Features Active with Gemini API`);

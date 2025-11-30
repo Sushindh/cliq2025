@@ -38,7 +38,7 @@ function AIDraftAssistant({ isOpen, onClose, onSendMessage }) {
 
     recommendationTimeoutRef.current = setTimeout(async () => {
       try {
-        const res = await axios.post('/api/fix-text', { text: currentSentence }, { timeout: 8000 });
+        const res = await axios.post('https://cliq2025.onrender.com/api/fix-text', { text: currentSentence }, { timeout: 8000 });
         const corrected = res.data.corrected.replace(/ \(fixed by AI\)$/, '');
 
         if (corrected !== currentSentence) {

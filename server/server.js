@@ -71,7 +71,7 @@ io.on('connection', (socket) => {
 });
 
 // Fix Text with Gemini
-app.post('/api/fix-text', async (req, res) => {
+app.post('https://cliq2025.onrender.com/api/fix-text', async (req, res) => {
   const { text } = req.body;
   if (!text) return res.status(400).json({ error: 'Text required' });
 
@@ -125,7 +125,7 @@ app.post('/api/fix-text', async (req, res) => {
 });
 
 // Predict next words
-app.post('/api/predict-words', async (req, res) => {
+app.post('https://cliq2025.onrender.com/api/predict-words', async (req, res) => {
   const { text } = req.body;
   if (!text || text.trim() === "" || text.endsWith(" ")) {
     return res.json({ predictions: [] });

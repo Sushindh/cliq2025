@@ -7,9 +7,9 @@ export default defineConfig({
   server: {
     port: 3000,
     proxy: {
-      '/api': 'http://localhost:5000',
+      '/api': 'https://cliq2025.onrender.com',
       '/socket.io': {
-        target: 'http://localhost:5000',
+        target: 'https://cliq2025.onrender.com',
         ws: true,
       },
     },

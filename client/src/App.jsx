@@ -8,7 +8,10 @@ import MessageList from './components/MessageList';
 import InputBar from './components/InputBar';
 import AIDraftAssistant from './components/AIDraftAssistant';
 
-const socket = io();
+const socket = io("https://cliq2025.onrender.com", {
+  transports: ["websocket"],
+});
+
 
 function App() {
   const [messages, setMessages] = useState([
@@ -79,7 +82,7 @@ function App() {
 
     correctionTimeoutRef.current = setTimeout(async () => {
       try {
-        const res = await axios.post('/api/fix-text', { text }, { timeout: 8000 });
+        const res = await axios.post('https://cliq2025.onrender.com/api/fix-text', { text }, { timeout: 8000 });
         const corrected = res.data.corrected.replace(/ \(fixed by AI\)$/, '');
 
         if (corrected !== text) {
@@ -113,7 +116,7 @@ function App() {
   const fixMessageWithAI = async (messageId, originalText) => {
     setEditingMessageId(messageId);
     try {
-      const res = await axios.post('/api/fix-text', { text: originalText });
+      const res = await axios.post('https://cliq2025.onrender.com/api/fix-text', { text: originalText });
       const corrected = res.data.corrected;
 
       setMessages(prev => prev.map(m =>

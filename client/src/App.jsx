@@ -128,7 +128,7 @@ function App() {
   };
 
   return (
-    <div className="flex h-screen bg-gray-900 text-white overflow-hidden">
+    <div className="flex h-screen bg-gradient-to-br from-cliqtrix-darker via-cliqtrix-dark to-cliqtrix-darker text-cliqtrix-textLight font-sans overflow-hidden">
       <Sidebar />
       <div className="flex-1 flex flex-col">
         <ChatHeader onOpenAIDraft={() => setIsAIDraftOpen(true)} />

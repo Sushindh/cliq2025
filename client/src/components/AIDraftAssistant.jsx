@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { X, CheckCircle, Lightbulb } from 'lucide-react';
+import { X, CheckCircle, Lightbulb, Sparkles } from 'lucide-react';
 
 function AIDraftAssistant({ isOpen, onClose, onSendMessage }) {
   const [draftInput, setDraftInput] = useState('');
@@ -134,28 +134,31 @@ function AIDraftAssistant({ isOpen, onClose, onSendMessage }) {
   if (!isOpen) return null;
 
   return (
-    <div className="w-96 bg-gray-800 border-l border-gray-700 flex flex-col h-screen">
+    <div className="w-96 bg-gradient-to-b from-cliqtrix-dark to-cliqtrix-darker border-l border-cliqtrix-accent/20 flex flex-col h-screen shadow-2xl">
       {/* Header */}
-      <div className="p-4 border-b border-gray-700 flex justify-between items-center bg-gray-800 sticky top-0">
-        <h3 className="font-semibold text-lg flex items-center gap-2">
-          <Lightbulb className="text-purple-400" size={20} />
+      <div className="p-4 border-b border-cliqtrix-accent/20 flex justify-between items-center bg-cliqtrix-darker sticky top-0">
+        <h3 className="font-bold text-lg flex items-center gap-2 text-cliqtrix-textLight">
+          <Sparkles className="text-cliqtrix-accent" size={20} />
           AI Draft Assistant
         </h3>
         <button 
           onClick={onClose} 
-          className="text-gray-400 hover:text-white transition p-1 hover:bg-gray-700 rounded"
+          className="text-cliqtrix-textMuted hover:text-cliqtrix-textLight transition p-1 hover:bg-cliqtrix-accent/10 rounded"
         >
           <X size={20} />
         </button>
       </div>
 
       {/* Tips Section */}
-      <div className="px-4 py-3 bg-purple-900 bg-opacity-30 border-b border-purple-700 text-xs text-purple-200">
-        <p className="font-semibold mb-2">💡 Tips:</p>
-        <ul className="space-y-1">
+      <div className="px-4 py-3 bg-cliqtrix-accent/10 border-b border-cliqtrix-accent/20 text-xs text-cliqtrix-accentLight">
+        <p className="font-semibold mb-2 flex items-center gap-1">
+          <Lightbulb size={14} />
+          Tips:
+        </p>
+        <ul className="space-y-1 text-cliqtrix-textMuted">
           <li>✓ Type long paragraphs with AI assistance</li>
-          <li>✓ Press <kbd className="bg-gray-700 px-1.5 py-0.5 rounded text-xs font-mono">Tab</kbd> to accept suggestions</li>
-          <li>✓ Press <kbd className="bg-gray-700 px-1.5 py-0.5 rounded text-xs font-mono">Esc</kbd> to dismiss</li>
+          <li>✓ Press <kbd className="bg-cliqtrix-darker px-1.5 py-0.5 rounded text-xs font-mono border border-cliqtrix-accent/30">Tab</kbd> to accept suggestions</li>
+          <li>✓ Press <kbd className="bg-cliqtrix-darker px-1.5 py-0.5 rounded text-xs font-mono border border-cliqtrix-accent/30">Esc</kbd> to dismiss</li>
         </ul>
       </div>
 
@@ -167,17 +170,17 @@ function AIDraftAssistant({ isOpen, onClose, onSendMessage }) {
           onChange={handleTextareaChange}
           onKeyDown={handleKeyDown}
           placeholder="Start typing your message... AI will suggest corrections for each sentence as you write."
-          className="flex-1 bg-gray-700 rounded-lg p-4 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 resize-none"
+          className="flex-1 bg-cliqtrix-darker rounded-lg p-4 text-sm text-cliqtrix-textLight placeholder-cliqtrix-textMuted border border-cliqtrix-accent/30 focus:outline-none focus:border-cliqtrix-accent/60 resize-none"
         />
 
         {/* Inline Recommendation Popup */}
         {inlineRecommendation && (
-          <div className="absolute bottom-24 left-4 right-4 bg-blue-900 bg-opacity-95 border border-blue-500 rounded-lg p-4 shadow-xl backdrop-blur-sm animate-in fade-in slide-in-from-bottom-2">
+          <div className="absolute bottom-24 left-4 right-4 bg-gradient-to-r from-cliqtrix-accent/30 to-cliqtrix-accent/20 border border-cliqtrix-accent/50 rounded-lg p-4 shadow-xl backdrop-blur-sm animate-in fade-in slide-in-from-bottom-2">
             <div className="flex items-start gap-3">
-              <Lightbulb size={18} className="text-blue-300 flex-shrink-0 mt-0.5" />
+              <Lightbulb size={18} className="text-cliqtrix-accent flex-shrink-0 mt-0.5" />
               <div className="flex-1 min-w-0">
-                <p className="text-xs text-blue-200 font-semibold mb-2">AI Suggestion:</p>
-                <p className="text-blue-100 text-sm leading-relaxed break-words">
+                <p className="text-xs text-cliqtrix-accentLight font-semibold mb-2">AI Suggestion:</p>
+                <p className="text-cliqtrix-textLight text-sm leading-relaxed break-words">
                   {inlineRecommendation.suggestion}
                 </p>
               </div>
@@ -185,13 +188,14 @@ function AIDraftAssistant({ isOpen, onClose, onSendMessage }) {
             <div className="flex gap-2 mt-3">
               <button
                 onClick={acceptInlineRecommendation}
-                className="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded text-xs font-semibold flex items-center justify-center gap-1 transition"
+                className="flex-1 bg-gradient-to-r from-cliqtrix-accent to-cliqtrix-accentLight hover:from-cliqtrix-accentLight hover:to-cliqtrix-accent text-cliqtrix-dark px-3 py-2 rounded-lg text-xs font-semibold flex items-center justify-center gap-1 transition"
               >
-                <span>Accept (Tab)</span>
+                <CheckCircle size={14} />
+                Accept (Tab)
               </button>
               <button
                 onClick={dismissInlineRecommendation}
-                className="bg-gray-700 hover:bg-gray-600 text-gray-200 px-3 py-2 rounded text-xs font-semibold transition"
+                className="bg-cliqtrix-darker hover:bg-cliqtrix-darker/80 text-cliqtrix-textMuted border border-cliqtrix-accent/30 px-3 py-2 rounded-lg text-xs font-semibold transition"
               >
                 Dismiss (Esc)
               </button>
@@ -200,9 +204,9 @@ function AIDraftAssistant({ isOpen, onClose, onSendMessage }) {
         )}
 
         {isLoadingRecommendation && (
-          <div className="absolute bottom-24 left-4 right-4 bg-gray-700 bg-opacity-50 border border-gray-600 rounded-lg p-3 text-xs text-gray-300">
+          <div className="absolute bottom-24 left-4 right-4 bg-cliqtrix-darker border border-cliqtrix-accent/30 rounded-lg p-3 text-xs text-cliqtrix-textMuted">
             <div className="flex items-center gap-2">
-              <div className="animate-spin h-4 w-4 border-2 border-purple-500 border-t-transparent rounded-full"></div>
+              <div className="animate-spin h-4 w-4 border-2 border-cliqtrix-accent border-t-transparent rounded-full"></div>
               <span>Analyzing your sentence...</span>
             </div>
           </div>
@@ -210,16 +214,16 @@ function AIDraftAssistant({ isOpen, onClose, onSendMessage }) {
       </div>
 
       {/* Character Count */}
-      <div className="px-4 py-2 text-xs text-gray-500 text-right">
+      <div className="px-4 py-2 text-xs text-cliqtrix-textMuted text-right">
         {draftInput.length} characters
       </div>
 
       {/* Send Button */}
-      <div className="p-4 border-t border-gray-700 bg-gray-800 sticky bottom-0">
+      <div className="p-4 border-t border-cliqtrix-accent/20 bg-cliqtrix-darker sticky bottom-0">
         <button
           onClick={sendDraft}
           disabled={!draftInput.trim()}
-          className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 disabled:opacity-50 disabled:cursor-not-allowed py-3 rounded-lg font-semibold flex items-center justify-center gap-2 transition active:scale-95"
+          className="w-full bg-gradient-to-r from-cliqtrix-accent to-cliqtrix-accentLight hover:from-cliqtrix-accentLight hover:to-cliqtrix-accent disabled:opacity-50 disabled:cursor-not-allowed py-3 rounded-lg font-semibold flex items-center justify-center gap-2 transition active:scale-95 text-cliqtrix-dark"
         >
           <CheckCircle size={20} />
           Send to Channel
